@@ -2,52 +2,46 @@
 #include <algorithm>
 #include <math.h>
 using namespace std;
-long long int l,n,k,a[300001]={999999999},c=1,arr[5000002];
+long long int l;
+long long int n,k,c=1,arr[510000],a,am1,fif=500000;
 int main(){
 	scanf("%lld %lld %lld",&l,&n,&k);
-	for(int i=1;i<=n;i++){
-		scanf("%lld",&a[i]);
-	}
-	if(n==1&&l>5000000){
-		int left=a[1]-1,right=a[1]+1,le=1,ri=1,cnt=1;
-		printf("0\n");
-		for(int i=1;i<=k;i++){
-			if(cnt==k) return 0; 
-			if(left>=0){
-				printf("%d\n",le);
-				left--;
-				le++;
-				cnt++;
+	for(long long int i=1;i<=n;i++){
+		scanf("%lld",&a);
+		arr[0]++;
+		if(i==1){
+			if(a+1<=fif){
+				arr[a+1]--;
 			}
-			if(cnt==k) return 0; 
-			else if(right<=l){
-				printf("%d\n",ri);
-				right--;
-				ri++;
-				cnt++;
+			//미리 1제거, 바로 옆 가로등 방지 
+		}
+		else{
+			long long int t=a-am1;
+			arr[1]++;
+			if(t%2==1&&t/2+1<=fif){
+				arr[t/2+1]=arr[t/2+1]-2;
+			}else{
+				if(t/2<=fif){
+					arr[t/2]--;
+				}
+				if(t/2+1<=fif){
+					arr[t/2+1]--;
+				}
+			}
+		}if(i==n){
+			arr[1]++;
+			if(l-a+1<=fif){
+				arr[l-a+1]--;
 			}
 		}
-		return 0;
-	}
-	for(int i=0;i<=l;i++){
-		if(i==a[c]){
-			arr[i]=0;
-			c++;
-		}else{
-			arr[i]=1;
+		am1=a;
+	}long long cnt=0,s=0;
+	for(long long int i=0;;i++){
+		s+=arr[i];
+		for(long long int j=1;j<=s;j++){
+			if(cnt>=k) return 0;
+			printf("%d\n",i);
+			cnt++;
 		}
-	}c=1;
-	for(int i=0;i<=l;i++){
-		if(i==a[c]){
-			//printf("%d\n",i);
-			c++;
-			continue;
-		}else{
-			arr[i]=min(abs(i-a[c]),abs(i-a[c-1]));
-		}
-	}
-	sort(arr,arr+l+1);
-	for(int i=0;i<k;i++){
-		printf("%lld\n",arr[i]);
 	}
 }
