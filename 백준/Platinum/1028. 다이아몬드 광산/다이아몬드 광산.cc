@@ -1,11 +1,12 @@
-#include <iostream>
+#include <stdio.h>
 #include <string>
+#include <algorithm>
 using namespace std;
 int arr[1001][1001];
 int ld[1001][1001];
 int rd[1001][1001];
 char ch[1001];
-int main() {
+int main(){
     int r,c;
     int t=0,x=0;
     scanf("%d %d",&r,&c);
