@@ -2,58 +2,32 @@
 
 int main(){
     int n;
+    int a[100001]={};
     int d[100001]={};
-    int b1;
-    int b2;
-    int g;
     int c=0;
     int max=0;
     scanf("%d",&n);
     for(int i=0;i<n;i++){
-        scanf("%d",&d[i]);
+        scanf("%d",&a[i]);
     }
-    //b1,b2,g
+    //printf("%d ",d[0]);
+    d[0]=a[0];
+    for(int i=1;i<n;i++){
+        d[i]+=d[i-1]+a[i];
+        //printf("%d ",d[i]);
+    }
+    //printf("\n");
     for(int i=1;i<n-1;i++){
-        c=0;
-        //b2->i
-        for(int j=i+1;j<n;j++){
-            c+=d[j];
-        }
-        for(int j=1;j<n;j++){
-            if(j!=i){
-                c+=d[j];
-            }
-        }
-        if(max<c){
+        c=d[n-1]-a[0]+d[n-1]-d[i]-a[i];
+        if(c>max){
             max=c;
         }
-    }
-    //b1,g,b2
-    for(int i=1;i<n-1;i++){
-        c=0;
-        for(int j=1;j<=i;j++){
-            c+=d[j];
-        }
-        for(int j=n-2;j>=i;j--){
-            c+=d[j];
-        }
-        if(max<c){
+        c=d[n-2]+d[i-1]-a[i];
+        if(c>max){
             max=c;
         }
-    }
-    //g,b2,b1
-    for(int i=n-2;i>=0;i--){
-        c=0;
-        //b2->i
-        for(int j=i-1;j>=0;j--){
-            c+=d[j];
-        }
-        for(int j=n-2;j>=0;j--){
-            if(j!=i){
-                c+=d[j];
-            }
-        }
-        if(max<c){
+        c=d[i]-a[0]+d[n-2]-d[i-1];
+        if(c>max){
             max=c;
         }
     }
