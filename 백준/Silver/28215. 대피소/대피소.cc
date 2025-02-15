@@ -66,8 +66,8 @@ int main()
 			}
 		}
 	}
-	
-	printf("%d", min);
+	if(min == 100000000) printf("0");
+	else printf("%d", min);
 	
 	return 0;
 }
