@@ -8,7 +8,6 @@ typedef struct medal
 	int m1;
 	int m2;
 	int m3;
-	int s;
 }medal;
 
 bool com(medal asdf, medal b)
@@ -27,6 +26,7 @@ bool com(medal asdf, medal b)
 int main()
 {
 	medal a[1005] = {0, };
+	int s = 0;
 	int n, k;
 	scanf("%d %d", &n, &k);
 	for(int i = 0; i<n; i++)
@@ -37,8 +37,18 @@ int main()
 	
 	for(int i = 0; i<n; i++)
 	{
-		if(a[i].c == k) printf("%d", i+1);
+		if(a[i].c == k)
+		{
+			for(int j = 0; j<i; j++)
+			{
+				if(a[i].m1 == a[j].m1 && a[i].m2 == a[j].m2 && a[i].m3 == a[j].m3) break;
+				else s++;
+			}
+			break;
+		}
 	}
+	
+	printf("%d", s+1);
 	
 	return 0;
 }
